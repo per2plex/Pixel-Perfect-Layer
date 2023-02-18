@@ -26,12 +26,12 @@ func _enter_tree() -> void:
 
 	add_custom_type(
 		NODE_NAME,
-		"CanvasLayer",
+		"Sprite2D",
 		preload("./nodes/pixel_perfect_layer.gd"),
 		preload("./icons/pixel_perfect_layer.svg")
 	)
 
-	add_autoload_singleton(HELPER_SINGLETON_NAME, preload("./utility/pixel_perfect_layer_helper.gd").get_path())
+	add_autoload_singleton(HELPER_SINGLETON_NAME, (preload("./utility/pixel_perfect_layer_helper.gd") as Resource).resource_path)
 
 func _exit_tree() -> void:
 	ProjectSettings.set_setting(Settings.VIEWPORT_CANVAS_CULL_MASK, null)
