@@ -9,17 +9,17 @@ const NODE_NAME := "PixelPerfectLayer"
 
 func _enter_tree() -> void:
 	ProjectSettings.set_setting(
-		Settings.DEFAULT_VIEWPORT_CANVAS_CULL_MASK,
+		Settings.VIEWPORT_CANVAS_CULL_MASK,
 		Defaults.DEFAULT_VIEWPORT_CANVAS_CULL_MASK
 	)
 
 	ProjectSettings.set_initial_value(
-		Settings.DEFAULT_VIEWPORT_CANVAS_CULL_MASK,
+		Settings.VIEWPORT_CANVAS_CULL_MASK,
 		Defaults.DEFAULT_VIEWPORT_CANVAS_CULL_MASK
 	)
 
 	ProjectSettings.add_property_info({
-		"name": Settings.DEFAULT_VIEWPORT_CANVAS_CULL_MASK,
+		"name": Settings.VIEWPORT_CANVAS_CULL_MASK,
 		"type": TYPE_INT,
 		"hint": PROPERTY_HINT_LAYERS_2D_PHYSICS,
 	})
@@ -27,14 +27,14 @@ func _enter_tree() -> void:
 	add_custom_type(
 		NODE_NAME,
 		"CanvasLayer",
-		preload("res://addons/pixel_perfect_layer/nodes/pixel_perfect_layer.gd"),
-		preload("res://addons/pixel_perfect_layer/icons/pixel_perfect_layer.svg")
+		preload("./nodes/pixel_perfect_layer.gd"),
+		preload("./icons/pixel_perfect_layer.svg")
 	)
 
-	add_autoload_singleton(HELPER_SINGLETON_NAME, "res://addons/pixel_perfect_layer/utility/pixel_perfect_layer_helper.gd")
+	add_autoload_singleton(HELPER_SINGLETON_NAME, preload("./utility/pixel_perfect_layer_helper.gd").get_path())
 
 func _exit_tree() -> void:
-	ProjectSettings.set_setting(Settings.DEFAULT_VIEWPORT_CANVAS_CULL_MASK, null)
+	ProjectSettings.set_setting(Settings.VIEWPORT_CANVAS_CULL_MASK, null)
 
 	remove_custom_type(NODE_NAME)
 	remove_autoload_singleton(HELPER_SINGLETON_NAME)
