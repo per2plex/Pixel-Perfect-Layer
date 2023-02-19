@@ -1,4 +1,3 @@
 extends Node
 
 const VIEWPORT_CANVAS_CULL_MASK := "pixel_perfect_layer/default_viewport_canvas_cull_mask"
-const PIXEL_PERFECT_LAYER_PROCESS_PRIORITY := "pixel_perfect_layer/pixel_perfect_layer_process_priority"

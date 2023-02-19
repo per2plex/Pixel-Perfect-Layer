@@ -3,25 +3,14 @@ class_name PixelPerfectLayer extends Sprite2D
 
 @export_flags_2d_render var canvas_cull_mask
 
+@export var target: Node2D = null
+@export var use_viewport_camera: bool = false
+@export var size = Vector2.ZERO
+
 var camera: Camera2D
-var sub_viewport_container: SubViewportContainer
 var sub_viewport: SubViewport
 
 func _ready() -> void:
-	process_priority = 1000
-
-func _enter_tree() -> void:
-	sub_viewport_container = SubViewportContainer.new()
-
-	sub_viewport_container.anchor_left = 0
-	sub_viewport_container.anchor_top = 0
-	sub_viewport_container.anchor_right = 1
-	sub_viewport_container.anchor_bottom = 1
-	sub_viewport_container.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	sub_viewport_container.grow_vertical = Control.GROW_DIRECTION_BOTH
-
-	sub_viewport_container.stretch = true
-
 	sub_viewport = SubViewport.new()
 
 	sub_viewport.world_2d = get_viewport().world_2d
@@ -45,24 +34,41 @@ func _enter_tree() -> void:
 
 func _process(delta: float) -> void:
 	var root_camera = get_viewport().get_camera_2d()
+	var real_target = get_parent() as Node2D
 
-	if not root_camera:
+	if target:
+		real_target = target
+
+	if use_viewport_camera:
+		top_level = true
+		real_target = root_camera
+
+	if not root_camera or not real_target:
 		return
 
-	var real_position = root_camera.get_screen_center_position()
-	var zoom = root_camera.zoom.x
+	var real_position = real_target.get_screen_center_position() \
+		if real_target is Camera2D \
+		else real_target.global_position
 
-	var real_viewport_size = get_viewport_rect().size / zoom
+	var real_viewport_size = get_viewport_rect().size / root_camera.zoom
 
 	sub_viewport.canvas_cull_mask = canvas_cull_mask
-	sub_viewport.size = real_viewport_size
 
-	offset = real_viewport_size - Vector2(sub_viewport.size)
-	global_position = real_position
+	if size != Vector2.ZERO:
+		sub_viewport.size = size
+	else:
+		sub_viewport.size = real_viewport_size
 
 	camera.global_position = real_position.floor()
-	camera.force_update_scroll()
-
 	var diff = camera.global_position - real_position
 
-	global_position += diff
+	if use_viewport_camera:
+		global_position = real_position
+		global_position += diff
+
+		camera.global_position = real_position + diff
+	else:
+		camera.global_position = real_position + diff
+
+	camera.force_update_scroll()
+
