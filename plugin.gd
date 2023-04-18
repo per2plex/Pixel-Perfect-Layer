@@ -4,9 +4,6 @@ extends EditorPlugin
 const Settings = preload("./utility/settings.gd")
 const Defaults = preload("./utility/defaults.gd")
 
-const HELPER_SINGLETON_NAME := "PixelPerfectLayerHelper"
-const NODE_NAME := "PixelPerfectLayer"
-
 func _enter_tree() -> void:
 	ProjectSettings.set_setting(
 		Settings.VIEWPORT_CANVAS_CULL_MASK,
@@ -25,16 +22,25 @@ func _enter_tree() -> void:
 	})
 
 	add_custom_type(
-		NODE_NAME,
+		"SPLayer",
 		"Sprite2D",
-		preload("./nodes/pixel_perfect_layer.gd"),
-		preload("./icons/pixel_perfect_layer.svg")
+		preload("./nodes/sp_layer.gd"),
+		preload("./icons/sp_layer.svg")
 	)
 
-	add_autoload_singleton(HELPER_SINGLETON_NAME, (preload("./utility/pixel_perfect_layer_helper.gd") as Resource).resource_path)
+	add_custom_type(
+		"SPLayerGroup",
+		"Node2D",
+		preload("./nodes/sp_layer_group.gd"),
+		preload("./icons/sp_layer_group.svg")
+	)
+
+	add_autoload_singleton("SPLayerHelper", (preload("./utility/sp_layer_helper.gd") as Resource).resource_path)
 
 func _exit_tree() -> void:
 	ProjectSettings.set_setting(Settings.VIEWPORT_CANVAS_CULL_MASK, null)
 
-	remove_custom_type(NODE_NAME)
-	remove_autoload_singleton(HELPER_SINGLETON_NAME)
+	remove_custom_type("SPLayer")
+	remove_custom_type("SPLayerGroup")
+
+	remove_autoload_singleton("SPLayerHelper")

@@ -1,7 +1,7 @@
-@icon("../icons/pixel_perfect_layer.svg")
-class_name PixelPerfectLayer extends Sprite2D
+@icon("../icons/sp_layer.svg")
+class_name SPLayer extends Sprite2D
 
-@export_flags_2d_render var canvas_cull_mask
+@export_flags_2d_render var canvas_cull_mask = 0
 
 @export var target: Node2D = null
 @export var use_viewport_camera: bool = false

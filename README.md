@@ -1,9 +1,4 @@
-# Pixel Perfect Tools
+# Smooth Pixels
 
-Various tools to help with pixel perfection.
+Various tools to help with smooth pixel perfection.
 
-## Nodes
-
-### PixelPerfectLayer
-
-TODO
