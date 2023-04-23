@@ -52,6 +52,12 @@ func _process(delta: float) -> void:
 
 	var real_viewport_size = get_viewport_rect().size / root_camera.zoom
 
+	# round to even number
+	real_viewport_size = Vector2(
+		int(real_viewport_size.x) + (int(real_viewport_size.x) & 1),
+		int(real_viewport_size.y) + (int(real_viewport_size.y) & 1),
+	)
+
 	sub_viewport.canvas_cull_mask = canvas_cull_mask
 
 	if size != Vector2.ZERO:
@@ -67,6 +73,17 @@ func _process(delta: float) -> void:
 		global_position += diff
 
 		camera.global_position = real_position + diff
+
+		var center_position = camera.global_position
+		var top_left_position = center_position - real_viewport_size / 2.0
+
+		var offset = Vector2(
+			fmod(top_left_position.x, root_camera.zoom.x),
+			fmod(top_left_position.y, root_camera.zoom.x)
+		)
+
+		# TODO: gets set multiple times if multiple layers are active
+		RenderingServer.global_shader_parameter_set("sp_pixel_camera_offset", offset)
 	else:
 		camera.global_position = real_position + diff
 

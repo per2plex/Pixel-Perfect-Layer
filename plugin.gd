@@ -35,7 +35,40 @@ func _enter_tree() -> void:
 		preload("./icons/sp_layer_group.svg")
 	)
 
+	ProjectSettings.set_setting(
+		"shader_globals/sp_camera_offset",
+		{
+			"type": "vec2",
+			"value": Vector2(0, 0)
+		}
+	)
+
+	ProjectSettings.set_setting(
+		"shader_globals/sp_camera_zoom",
+		{
+			"type": "float",
+			"value": 0
+		}
+	)
+
+	ProjectSettings.set_setting(
+		"shader_globals/sp_pixel_camera_offset",
+		{
+			"type": "vec2",
+			"value": Vector2(0, 0)
+		}
+	)
+
+	ProjectSettings.set_setting(
+		"shader_globals/sp_dither_pattern",
+		{
+			"type": "sampler2D",
+			"value": "res://addons/smooth-pixels/shaders/dither_4x4.png"
+		}
+	)
+
 	add_autoload_singleton("SPLayerHelper", (preload("./utility/sp_layer_helper.gd") as Resource).resource_path)
+	add_autoload_singleton("SPCameraHelper", (preload("./utility/sp_camera_helper.gd") as Resource).resource_path)
 
 func _exit_tree() -> void:
 	ProjectSettings.set_setting(Settings.VIEWPORT_CANVAS_CULL_MASK, null)
@@ -44,3 +77,4 @@ func _exit_tree() -> void:
 	remove_custom_type("SPLayerGroup")
 
 	remove_autoload_singleton("SPLayerHelper")
+	remove_autoload_singleton("SPCameraHelper")
