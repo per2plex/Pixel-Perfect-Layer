@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://30hdwny6mmnp"]
+
+[ext_resource type="Shader" path="res://addons/smooth-pixels/shaders/sp_layer_dither_light.gdshader" id="1_v54l7"]
+
+[resource]
+shader = ExtResource("1_v54l7")

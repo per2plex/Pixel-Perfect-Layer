@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
 		if real_target is Camera2D \
 		else real_target.global_position
 
-	var real_viewport_size = get_viewport_rect().size / root_camera.zoom
+	var real_viewport_size = get_viewport_rect().size / root_camera.zoom + root_camera.zoom
 
 	# round to even number
 	real_viewport_size = Vector2(
