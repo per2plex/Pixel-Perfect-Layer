@@ -4,3 +4,5 @@
 
 [resource]
 shader = ExtResource("1_12ytm")
+shader_parameter/enable_dither_alpha = true
+shader_parameter/enable_dither_light = true
