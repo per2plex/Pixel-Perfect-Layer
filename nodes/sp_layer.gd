@@ -77,13 +77,8 @@ func _process(delta: float) -> void:
 		var center_position = camera.global_position
 		var top_left_position = center_position - real_viewport_size / 2.0
 
-		var offset = Vector2(
-			fmod(top_left_position.x, root_camera.zoom.x),
-			fmod(top_left_position.y, root_camera.zoom.x)
-		)
-
 		# TODO: gets set multiple times if multiple layers are active
-		RenderingServer.global_shader_parameter_set("sp_pixel_camera_offset", offset)
+		RenderingServer.global_shader_parameter_set("sp_pixel_camera_offset", top_left_position)
 	else:
 		camera.global_position = real_position + diff
 

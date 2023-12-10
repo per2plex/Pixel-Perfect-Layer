@@ -1,6 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://di3uh6m3c570i"]
-
-[ext_resource type="Shader" path="res://addons/smooth-pixels/shaders/sp_dither_light.gdshader" id="1_kvrql"]
-
-[resource]
-shader = ExtResource("1_kvrql")
