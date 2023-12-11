@@ -1,7 +1,7 @@
 extends Node
 
-const Settings = preload("./settings.gd")
-const Defaults = preload("./defaults.gd")
+const Settings = preload("./sp_settings.gd")
+const Defaults = preload("./sp_defaults.gd")
 
 func _ready() -> void:
 	set_default_viewport_canvas_cull_mask(ProjectSettings.get_setting(

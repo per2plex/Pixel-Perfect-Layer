@@ -1,8 +1,8 @@
 @tool
 extends EditorPlugin
 
-const Settings = preload("./utility/settings.gd")
-const Defaults = preload("./utility/defaults.gd")
+const Settings = preload("./utility/sp_settings.gd")
+const Defaults = preload("./utility/sp_defaults.gd")
 
 func _enter_tree() -> void:
 	ProjectSettings.set_setting(
