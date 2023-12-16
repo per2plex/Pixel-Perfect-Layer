@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bc8i3rfwpa72n"]
+
+[ext_resource type="Shader" path="res://addons/smooth-pixels/shaders/sp_sprite.gdshader" id="1_ue2wj"]
+
+[resource]
+shader = ExtResource("1_ue2wj")
+shader_parameter/enable_dither_alpha = false
+shader_parameter/enable_dither_light = true

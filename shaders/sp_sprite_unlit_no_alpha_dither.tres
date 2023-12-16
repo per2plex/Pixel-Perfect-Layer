@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b4y11xe7x5ifg"]
+
+[ext_resource type="Shader" path="res://addons/smooth-pixels/shaders/sp_sprite_unlit.gdshader" id="1_2jg3f"]
+
+[resource]
+shader = ExtResource("1_2jg3f")
+shader_parameter/enable_dither_alpha = false
